@@ -5,7 +5,6 @@ import mongoose from "mongoose";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "./models/user.js";
-import user from "./models/user.js";
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8080;
