@@ -9,7 +9,8 @@ const User = new Schema({
   },
   username: {
     type: String,
-    default: crypto.randomBytes(8).toString("hex"),
+    required: true,
+    unique: true,
   },
   password: {
     type: String,
