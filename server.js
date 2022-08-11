@@ -58,7 +58,9 @@ app.post("/api/user/gen", async (request, response) => {
       password: request.body.password,
     });
   } catch (Error) {
-    console.error(Error);
+    return response.status(500).json({
+      message: "User already exists",
+    });
   }
 });
 
