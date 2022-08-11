@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { randomBytes } from "crypto";
+import crypto from "crypto";
 const Schema = mongoose.Schema;
 
 const User = new Schema({
@@ -9,7 +9,7 @@ const User = new Schema({
   },
   username: {
     type: String,
-    default: randomBytes(8).toString("hex"),
+    default: crypto.randomBytes(8).toString("hex"),
   },
   password: {
     type: String,
