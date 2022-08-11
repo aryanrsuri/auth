@@ -107,4 +107,37 @@ app.delete("/api/user/del", async (request, response) => {
   }
 });
 
+// check if the use is a temp user
+app.get("/api/user/temp", async (request, response) => {
+  try {
+    const { token } = request.body;
+    const user = jwt.verify(
+      token,
+      process.env.TOKEN_SECRET,
+      (Error, Decoded) => {
+        if (Error) {
+          return response.status(401).json({
+            message: "Invalid Token",
+          });
+        } else {
+          return Decoded;
+        }
+      }
+    );
+
+    const temp = await User.findOne({ username: user.username });
+    if (temp.temp) {
+      return response.json({
+        message: `User ${user.username} is a temp user`,
+      });
+    } else {
+      return response.json({
+        message: `User ${user.username} is not a temp user`,
+      });
+    }
+  } catch (Error) {
+    console.error(Error);
+  }
+});
+
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
